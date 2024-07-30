@@ -42,4 +42,23 @@ const UpdateUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { UpdateUserProfile, UserDetail };
+// register a user
+const RegisterUser = async (req, res) => {
+  try {
+    const response = await fetch(`${process.env.OKTA_BASEURL}/api/v1/users`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `SSWS ${process.env.OKTA_TOKEN}`,
+      },
+      body: JSON.stringify(req.body),
+    });
+    const parsedVal = await response.json();
+    res.status(200).json(parsedVal);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+module.exports = { UpdateUserProfile, UserDetail, RegisterUser };
