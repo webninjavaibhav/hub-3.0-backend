@@ -25,7 +25,7 @@ const UpdateUserProfile = async (req, res) => {
     const response = await fetch(
       `${process.env.OKTA_BASEURL}/api/v1/users/${userId}`,
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -35,6 +35,7 @@ const UpdateUserProfile = async (req, res) => {
       }
     );
     const parsedVal = await response.json();
+    console.log("req.body", req.body);
     res.status(200).json(parsedVal);
   } catch (error) {
     res.status(400).json({ message: error.message });
