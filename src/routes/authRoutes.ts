@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { userDetail, updateUserProfile } from '../controllers/authController';
 
-const router = Router();
+const authRoutes = Router();
 
-router.get('/userInfo/:userId', userDetail);
-router.put('/userInfo/:userId', updateUserProfile)
+authRoutes.get('/userInfo/:userId', userDetail);
+authRoutes.put('/userInfo/:userId', updateUserProfile)
 
 
-export default router;
+export default authRoutes;
