@@ -1,5 +1,5 @@
 // get the user details
-const userDetail = async (req, res) => {
+const UserDetail = async (req, res) => {
   try {
     const userId = req.params.userId;
     const response = await fetch(
@@ -19,7 +19,7 @@ const userDetail = async (req, res) => {
 };
 
 // update the user profile
-const updateUserProfile = async (req, res) => {
+const UpdateUserProfile = async (req, res) => {
   try {
     const userId = req.params.userId;
     const response = await fetch(
@@ -41,4 +41,4 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { updateUserProfile, userDetail };
+module.exports = { UpdateUserProfile, UserDetail };
