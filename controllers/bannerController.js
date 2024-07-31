@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
-const filePath = path.join(__dirname, "/tmp/bannerData.json");
+const filePath = path.join("/tmp", "bannerData.json");
 
 // Helper function to read JSON data
 const readData = () => {
