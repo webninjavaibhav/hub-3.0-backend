@@ -6,6 +6,9 @@ const filePath = path.join("/tmp", "bannerData.json");
 
 // Helper function to read JSON data
 const readData = () => {
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, JSON.stringify([])); // Create an empty array if file does not exist
+  }
   const rawData = fs.readFileSync(filePath);
   return JSON.parse(rawData);
 };
