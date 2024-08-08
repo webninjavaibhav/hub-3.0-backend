@@ -3,7 +3,7 @@ const Router = require("express");
 const { GetAccessToken } = require("../../../controllers/salesforce/auth");
 const authRoutes = Router();
 
-authRoutes.post("/getToken", async (req, res) => {
+authRoutes.get("/getToken", async (req, res) => {
   try {
     const accessToken = await GetAccessToken();
     res.status(200).json(accessToken);
