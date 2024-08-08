@@ -26,13 +26,13 @@ const GetContact = async (req, res) => {
     const userId = req.params.contactId;
     const accessToken = req.headers.authorization.split(" ")[1];
 
-    const url = `${process.env.SALESFORCE_BASEURL}/query/?q=SELECT+Id,Name,AccountId,Account.Name+from+Contact+WHERE+AuthZeroId__c+=+'${userId}'`;
+    const url = `${process.env.SALESFORCE_BASEURL}/query/?q=SELECT+Id,Name,FirstName,LastName,Email,AccountId,Account.Name+from+Contact+WHERE+AuthZeroId__c+=+'${userId}'`;
     const response = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    res.status(200).json(response.data);
+    res.status(200).json(response.data.records[0]);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
