@@ -8,7 +8,7 @@ const {
 const contactRoutes = Router();
 
 contactRoutes.post("/create", CreateContact);
-contactRoutes.get("/getContact", GetContact);
+contactRoutes.get("/getContact/:contactId", GetContact);
 contactRoutes.put("/update/:contactId", UpdateContact);
 
 module.exports = contactRoutes;

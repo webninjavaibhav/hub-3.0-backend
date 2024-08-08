@@ -2,7 +2,7 @@ const axios = require("axios");
 const qs = require("qs");
 
 // get access token from salseforce
-const GetAccessToken = async (req, res) => {
+const GetAccessToken = async () => {
   const url = process.env.SALESFORCE_TOKEN_URL;
   const data = {
     grant_type: process.env.GRANT_TYPE,
@@ -20,9 +20,9 @@ const GetAccessToken = async (req, res) => {
 
   try {
     const result = await axios.post(url, qs.stringify(data), config);
-    res.status(200).json(result.data);
+    return result.data;
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return false;
   }
 };
 
