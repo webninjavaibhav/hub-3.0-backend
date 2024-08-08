@@ -105,25 +105,25 @@ const RegisterUser = async (req, res) => {
     const result = await CreateContact(obj, token.access_token);
     console.log("Register in salesforce :-");
 
-    if (result) {
-      // send email from okta once the user create contact i salesforce
-      await fetch(
-        `${process.env.OKTA_BASEURL}/api/v1/users/${userId}/lifecycle/activate?sendEmail=true`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `SSWS ${process.env.OKTA_TOKEN}`,
-          },
-        }
-      );
-      res.status(200).json(parsedVal);
-    } else {
+    if (!result) {
       res
         .status(400)
         .json({ message: "Failed to create contact in Salesforce" });
     }
+
+    // send email from okta once the user create contact i salesforce
+    await fetch(
+      `${process.env.OKTA_BASEURL}/api/v1/users/${userId}/lifecycle/activate?sendEmail=true`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `SSWS ${process.env.OKTA_TOKEN}`,
+        },
+      }
+    );
+    res.status(200).json(parsedVal);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
