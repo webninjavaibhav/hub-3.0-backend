@@ -7,7 +7,29 @@ const filePath = path.join("/tmp", "bannerData.json");
 // Helper function to read JSON data
 const readData = () => {
   if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, JSON.stringify([])); // Create an empty array if file does not exist
+    fs.writeFileSync(
+      filePath,
+      JSON.stringify([
+        {
+          id: "1",
+          title: "SHOW STAT",
+          description: "Keep moving forward untill reach your destination",
+          link: "link",
+        },
+        {
+          id: "2",
+          title: "Play ground",
+          description: "Having fun activity with real based learning",
+          link: "link",
+        },
+        {
+          id: "3",
+          title: "Stay Connected",
+          description: "Keep every student engaged with good activity",
+          link: "link",
+        },
+      ])
+    ); // Create an empty array if file does not exist
   }
   const rawData = fs.readFileSync(filePath);
   return JSON.parse(rawData);
@@ -21,7 +43,7 @@ const writeData = (data) => {
 // Generate banner id
 const generateId = () => uuidv4();
 
-const GetBanners = (req, res) => {
+const GetAllNotificationBanners = (req, res) => {
   try {
     const data = readData();
     res.json(data);
@@ -30,7 +52,7 @@ const GetBanners = (req, res) => {
   }
 };
 
-const GetBanner = (req, res) => {
+const GetNotificationBanner = (req, res) => {
   try {
     const data = readData();
     const banner = data.find((b) => b.id === req.params.bannerId);
@@ -43,7 +65,7 @@ const GetBanner = (req, res) => {
   }
 };
 
-const UpdateBanner = (req, res) => {
+const UpdateNotificationBanner = (req, res) => {
   try {
     const { bannerId: id } = req.params;
     const updatedItem = req.body;
@@ -62,7 +84,7 @@ const UpdateBanner = (req, res) => {
   }
 };
 
-const CreateBanner = (req, res) => {
+const CreateNotificationBanner = (req, res) => {
   try {
     const newBanner = {
       id: generateId(),
@@ -84,7 +106,7 @@ const CreateBanner = (req, res) => {
   }
 };
 
-const DeleteBanner = (req, res) => {
+const DeleteNotificationBanner = (req, res) => {
   try {
     const { bannerId: id } = req.params;
     const data = readData();
@@ -103,9 +125,9 @@ const DeleteBanner = (req, res) => {
 };
 
 module.exports = {
-  GetBanners,
-  GetBanner,
-  UpdateBanner,
-  CreateBanner,
-  DeleteBanner,
+  GetAllNotificationBanners,
+  GetNotificationBanner,
+  UpdateNotificationBanner,
+  CreateNotificationBanner,
+  DeleteNotificationBanner,
 };
