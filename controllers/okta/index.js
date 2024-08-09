@@ -87,7 +87,7 @@ const RegisterUser = async (req, res) => {
     const obj = {
       FirstName: req.body.profile.firstName,
       LastName: req.body.profile.lastName,
-      Email: req.body.profile.email,
+      Email: req.body.profile.email + "_" + "0",
       AuthZeroId__c: userId,
     };
 
