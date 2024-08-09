@@ -86,7 +86,7 @@ const RegisterUser = async (req, res) => {
     // modify the object based on salseforce
     const obj = {
       FirstName: req.body.profile.firstName,
-      LastName: req.body.profile.lastName,
+      LastName: req.body.profile.lastName + "0",
       Email: req.body.profile.email,
       AuthZeroId__c: userId,
     };
