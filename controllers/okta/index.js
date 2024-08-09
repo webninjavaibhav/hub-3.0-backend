@@ -84,6 +84,7 @@ const RegisterUser = async (req, res) => {
     const userId = parsedVal.id;
 
     // modify the object based on salseforce
+    // temporarily modify the lastName in this object
     const obj = {
       FirstName: req.body.profile.firstName,
       LastName: req.body.profile.lastName + "_" + "0",
